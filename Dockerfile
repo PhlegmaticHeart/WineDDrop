@@ -7,19 +7,32 @@ RUN useradd -ms /bin/bash admin
 RUN usermod -aG sudo admin
 
 
-# Set passwords
+# Set passwords from passwd.txt
 RUN --mount=type=secret,id=pusrs \
     echo "root:$(sed -n '1s/\s*#.*$//p' /run/secrets/pusrs)" | chpasswd
 
 RUN --mount=type=secret,id=pusrs \
     echo "admin:$(sed -n '2s/\s*#.*$//p' /run/secrets/pusrs)" | chpasswd
 
+# Add support for 32bit games
 RUN dpkg --add-architecture i386
 
 # Install prerequisites
 RUN sed -i 's/^Components: main$/Components: main contrib non-free non-free-firmware/' /etc/apt/sources.list.d/debian.sources
 RUN apt-get update \
     && apt-get install -y \
+        sudo \
+        wget \
+        dbus-x11 \
+        x11-xserver-utils \
+        git \
+        gosu \
+        p7zip \
+        software-properties-common \
+        tzdata \
+        gnupg \
+        curl \
+        less \
         apt-transport-https \
         ca-certificates \
 	gpg \
@@ -27,13 +40,11 @@ RUN apt-get update \
         gzip \
 	unzip \
 	gpg-agent \
+	alsa-utils \
 	libasound2 \
 	pulseaudio \
 	pulseaudio-utils \
 	libpulse0 \
-	alsa-utils \
-        sudo \
-        wget \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -49,6 +60,8 @@ RUN wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/d
 RUN apt-get update \
     && apt-get install -y --install-recommends winehq-${WINE_BRANCH} \
     && rm -rf /var/lib/apt/lists/*
+
+#Use this one instead, if you need the apt version
 #RUN apt-get update \
 #    && apt-get install -y --install-recommends wine wine64 wine32 \
 #    && rm -rf /var/lib/apt/lists/*
@@ -59,46 +72,10 @@ FROM with_wine AS with_tricks
 # Gets winetricks
 
 RUN apt-get update \
-    && apt-get install -y winetricks \
-        dbus-x11 \
-        x11-xserver-utils \
-        git \
-        gosu \
-        p7zip \
-        software-properties-common \
-        tzdata \
-        unzip \
-        gnupg \
-        less \
-        pciutils \
-        vulkan-tools \
-        mesa-vulkan-drivers \
-        mesa-vulkan-drivers:i386 \
-        libvulkan1 \
-        libvulkan1:i386 \
-        libglx-mesa0 \
-        libgl1-mesa-dri \
-	libxv-dev:i386 \
-	libglu1-mesa-dev:i386 \
-	xauth \
-        jq \
-        curl \
-        libcanberra-gtk-module \
-        libcanberra-gtk3-module \
-	g++-multilib \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y winetricks
 
 
-FROM with_tricks AS with_opengl
-
-# Gets virtualg
-RUN wget https://raw.githubusercontent.com/VirtualGL/repo/main/VirtualGL.list \
-    -O  /etc/apt/sources.list.d/VirtualGL.list
-RUN wget -q -O- https://packagecloud.io/dcommander/virtualgl/gpgkey | \
-    gpg --dearmor >/etc/apt/trusted.gpg.d/VirtualGL.gpg
-RUN apt-get update && apt-get install -y virtualgl virtualgl32
-
-FROM with_opengl AS with_lutris
+FROM with_tricks AS with_lutris
 
 # Gets Lutris
 
@@ -117,6 +94,52 @@ RUN mkdir -p /tmp/lutris && \
     mkdir -p /opt/lutris && \
     tar -C /opt/lutris --strip-components 1 -xf /tmp/lutris/lutris && \
     rm -rf /tmp/lutris
+
+FROM with_lutris AS ending
+
+
+
+# # # # # # # # # # # # # # # # # # #
+#
+#  PUT YOUR ADDITIONAL PACKAGES HERE
+#    |   |   |   |   |   |   |   | 
+#    V   V   V   V   V   V   V   V
+
+
+
+RUN apt-get update \
+    && apt-get install -y \
+        pciutils \
+        vulkan-tools \
+        mesa-vulkan-drivers \
+        mesa-vulkan-drivers:i386 \
+        libvulkan1 \
+        libvulkan1:i386 \
+        libglx-mesa0 \
+        libgl1-mesa-dri \
+	libxv-dev:i386 \
+	libglu1-mesa-dev:i386 \
+	xauth \
+        jq \
+        libcanberra-gtk-module \
+        libcanberra-gtk3-module \
+	g++-multilib \
+    && rm -rf /var/lib/apt/lists/*
+
+# Uncomment if you need virtualgl ( if you host container on headless machine )
+#RUN wget https://raw.githubusercontent.com/VirtualGL/repo/main/VirtualGL.list \
+#    -O  /etc/apt/sources.list.d/VirtualGL.list
+#RUN wget -q -O- https://packagecloud.io/dcommander/virtualgl/gpgkey | \
+#    gpg --dearmor >/etc/apt/trusted.gpg.d/VirtualGL.gpg
+#RUN apt-get update && apt-get install -y virtualgl virtualgl32
+
+
+#
+#  END OF ADDITIONAL PACKAGES
+#
+# # # # # # # # # # # # # # # # # # #
+
+# Adds the entrypoints.sh inside the container, just as base safe net, we'll override it with run.sh
 
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
