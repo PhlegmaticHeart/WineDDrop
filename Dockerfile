@@ -36,8 +36,10 @@ RUN apt-get update \
         apt-transport-https \
         ca-certificates \
 	gpg \
+        jq \
         tar \
         gzip \
+	xauth \
 	unzip \
 	gpg-agent \
 	alsa-utils \
@@ -119,8 +121,6 @@ RUN apt-get update \
         libgl1-mesa-dri \
 	libxv-dev:i386 \
 	libglu1-mesa-dev:i386 \
-	xauth \
-        jq \
         libcanberra-gtk-module \
         libcanberra-gtk3-module \
 	g++-multilib \
