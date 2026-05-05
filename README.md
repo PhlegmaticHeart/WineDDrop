@@ -36,14 +36,19 @@ I hope that you'll find it a good starting point to play on linux/mac.
 
 Note: I have included all main libraries to let the majority of games to work, including vulkan, opengl and gtk support, the build process might require a while to finish.
 
+For a streamlined usage, you can put your aliases inside the file "aliases.txt" ( for example your lutris executables, using the template also included inside the same file ).
+
 **Sound**
 
-Actually sound rely on PulseAudio, but it can already work even only with Alsa.
+Actually sound rely on PulseAudio and, if not supported it has also Alsa.
+Sound, even if not fine-tuned for you pc, should work out-of-the-box without having to touch anything.
 
 **Video**
 
 The container rely on X11 session forwarding of the executor user.
+Its already forwarded, just start a GUI app inside the container and you should see it on your scree.n
 
 WIP...
+
 
 

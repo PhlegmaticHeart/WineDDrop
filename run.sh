@@ -5,6 +5,7 @@ set -e
 IMAGE_NAME="wineddrop"
 TAG="latest"
 PLATFORM=$(docker info --format '{{.Architecture}}')  # Auto-detect
+SCRIPTFOLDER=$( dirname $0 )
 
 case $1 in
 
@@ -33,6 +34,7 @@ docker run \
   -v ~/.Xauthority:/root/.Xauthority \
   -v /home/$USER:/home/admin/bench \
   -v /media:/media \
+  -v $SCRIPTFOLDER/aliases.txt:/home/admin/aliases.txt \
   -v lutris_prefixes:/home/admin/Games \
   --mount type=bind,source=$PWD/entrypoint.sh,target=/usr/bin/entrypoint.sh \
   --entrypoint /usr/bin/entrypoint.sh \

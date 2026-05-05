@@ -139,6 +139,15 @@ RUN apt-get update \
 #
 # # # # # # # # # # # # # # # # # # #
 
+# Adds Lutris alias and aliases source file
+RUN echo 'alias lutris="/opt/lutris/bin/lutris"' >> /home/admin/.bashrc
+
+COPY aliases.txt /home/admin/aliases.txt
+
+RUN echo 'alias lutris="/opt/lutris/bin/lutris"' >> /home/admin/.bashrc
+
+RUN echo 'source /home/admin/aliases.txt' >> /home/admin/.bashrc
+
 # Adds the entrypoints.sh inside the container, just as base safe net, we'll override it with run.sh
 
 COPY entrypoint.sh /usr/bin/entrypoint.sh
