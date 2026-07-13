@@ -54,4 +54,7 @@ Sound, even if not fine-tuned for you pc, should work out-of-the-box without hav
 The container rely on X11 session forwarding of the executor user.
 Its already forwarded, just start a GUI app inside the container and you should see it on your screen.
 
+## Requirements
 
+For using this project you need to install Docker using your distro's packages manager.
+Be sure to have at least 10 GB of free disk space before executing build.sh.
