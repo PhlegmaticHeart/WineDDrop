@@ -5,7 +5,7 @@ The aim of the project is to deliver a plug and play container, empowering you w
 a ready to start environment, a canvas to let you use wine and lutris without having to install their dependancies or
 having to mess up with different versions, thanks to docker compatibility layer.
 
-**Another wine-based container?**
+## Another wine-based container?
 
 Granted that there are many similar other projects, i decided to create this one because i feel that other projects are:
 
@@ -27,7 +27,7 @@ Note: X11, Xauthority and pulse tmp folders are shared with the container as the
 I hope that you'll find it as a good starting point to play on linux/mac.
 
 
-**Usage**
+## Usage
 
 1 ) After cloning/downloading the repo, you have just to execute ./build.sh to start building the container.
 
@@ -44,12 +44,12 @@ Note: I have included all main libraries to let the majority of games to work, i
 
 For a streamlined usage, you can put your aliases inside the file "aliases.txt" ( for example your lutris executables, using the template also included inside the same file ).
 
-**Sound**
+## Sound
 
 Actually sound rely on PulseAudio and, if not supported it has also Alsa.
 Sound, even if not fine-tuned for you pc, should work out-of-the-box without having to touch anything.
 
-**Video**
+## Video
 
 The container rely on X11 session forwarding of the executor user.
 Its already forwarded, just start a GUI app inside the container and you should see it on your screen.
