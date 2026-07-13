@@ -1,9 +1,11 @@
+***Wine/Lutris canvas container***
+
 This project is a personal take on containerizing wine, winetricks and lutris;
-The aim of the project is to deliver a plug and play experience, in the sense that you'll be empowered with
+The aim of the project is to deliver a plug and play container, empowering you with
 a ready to start environment, a canvas to let you use wine and lutris without having to install their dependancies or
 having to mess up with different versions, thanks to docker compatibility layer.
 
-**Another wine container?**
+**Another wine-based container?**
 
 Granted that there are many similar other projects, i decided to create this one because i feel that other projects are:
 
@@ -12,8 +14,6 @@ Granted that there are many similar other projects, i decided to create this one
 - unnecessarily fancy
 
 - unnecessarily bare
-
-
 
 This container is that one thing that you spin, just works and let you know everything that its happening.
 No long configuration scripts, no bloat ( like zenity ).
@@ -24,7 +24,7 @@ Actually, all offered scripts do NOT act outside containerized environment, stay
 Note: X11, Xauthority and pulse tmp folders are shared with the container as they are necessary for video and audio forwarding.
 
 
-I hope that you'll find it a good starting point to play on linux/mac.
+I hope that you'll find it as a good starting point to play on linux/mac.
 
 
 **Usage**
