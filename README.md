@@ -1,4 +1,4 @@
-*Wine/Lutris canvas container*
+****Wine/Lutris canvas container****
 
 This project is a personal take on containerizing wine, winetricks and lutris;
 The aim of the project is to deliver a plug and play container, empowering you with
