@@ -7,11 +7,7 @@ I decided to create this project, granted that there are many similar others, be
 
 - unnecessarily bloated
 
-or
-
 - unnecessarily fancy
-
-or
 
 - unnecessarily bare
 
@@ -20,7 +16,7 @@ No long configuration scripts, no bloat ( like zenity ), if you have to fine tun
 
 
 Actually, all offered scripts do NOT act outside containerized environment, stay safe.
-( except for X11, Xauthority and pulse tmp folders, necessary for video and audio forwarding ).
+Note: X11, Xauthority and pulse tmp folders are shared with the container as they are necessary for video and audio forwarding.
 
 
 I hope that you'll find it a good starting point to play on linux/mac.
@@ -30,7 +26,8 @@ I hope that you'll find it a good starting point to play on linux/mac.
 
 1 ) After cloning/downloading the repo, you have just to execute ./build.sh to start building the container.
 
-2 ) use ./run.sh [ARGUMENT] for everything else, from starting the container, to stopping it, to removing it etc...
+2 ) use ./run.sh [ARGUMENT] for everything else, from starting the container, to stopping it, to removing it etc... 
+Note: to see the full supported arguments list of run.sh, execute it without arguments.
 
 3 ) Thats it, really, if you want to add an alias to the container's bashrc or execute a precise command you can edit entrypoint.sh, if you want to change or review users' passwords, you can manage them inside passwd.txt. 
 
@@ -46,9 +43,6 @@ Sound, even if not fine-tuned for you pc, should work out-of-the-box without hav
 **Video**
 
 The container rely on X11 session forwarding of the executor user.
-Its already forwarded, just start a GUI app inside the container and you should see it on your scree.n
-
-WIP...
-
+Its already forwarded, just start a GUI app inside the container and you should see it on your screen.
 
 

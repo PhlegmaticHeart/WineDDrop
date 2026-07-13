@@ -7,7 +7,11 @@
 
 # echo 'alias GAME_NAME="/opt/lutris/bin/lutris lutris:rungame/GAME_INSIDE_LUTRIS"' >> ~/.bashrc
 
+#EXAMPLES:
 
+#alias wow="/opt/lutris/bin/lutris lutris:rungame/wow"
+#alias spore="/opt/lutris/bin/lutris lutris:rungame/spore"
+#alias kotor="/opt/lutris/bin/lutris lutris:rungame/kotor"
 
 #Use this template once you have installed a game manually with wine to start it with an alias.
 
