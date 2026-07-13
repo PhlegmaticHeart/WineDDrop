@@ -3,7 +3,9 @@ The aim of the project is to deliver a plug and play experience, in the sense th
 a ready to start environment, a canvas to let you use wine and lutris without having to install their dependancies or
 having to mess up with different versions, thanks to docker compatibility layer.
 
-I decided to create this project, granted that there are many similar others, because i feel other projects are:
+**Another wine container?**
+
+Granted that there are many similar other projects, i decided to create this one because i feel that other projects are:
 
 - unnecessarily bloated
 
@@ -11,9 +13,12 @@ I decided to create this project, granted that there are many similar others, be
 
 - unnecessarily bare
 
-This container is that one thing that you spin, just works and let you know everything that its happening.
-No long configuration scripts, no bloat ( like zenity ), if you have to fine tune it or add more libraries and packages, its your canvas. 
 
+
+This container is that one thing that you spin, just works and let you know everything that its happening.
+No long configuration scripts, no bloat ( like zenity ).
+
+If you have to fine tune it or add more libraries and packages, its meant to be your canvas. 
 
 Actually, all offered scripts do NOT act outside containerized environment, stay safe.
 Note: X11, Xauthority and pulse tmp folders are shared with the container as they are necessary for video and audio forwarding.
@@ -27,9 +32,13 @@ I hope that you'll find it a good starting point to play on linux/mac.
 1 ) After cloning/downloading the repo, you have just to execute ./build.sh to start building the container.
 
 2 ) use ./run.sh [ARGUMENT] for everything else, from starting the container, to stopping it, to removing it etc... 
-Note: to see the full supported arguments list of run.sh, execute it without arguments.
+Notes: 
+To see the full supported arguments list of run.sh, execute it without arguments.
+The run.sh script automatically mount your personal user's home folder inside the container as [USER NAME]_home, feel free to put your prefixes there.
 
-3 ) Thats it, really, if you want to add an alias to the container's bashrc or execute a precise command you can edit entrypoint.sh, if you want to change or review users' passwords, you can manage them inside passwd.txt. 
+3 ) Thats it, really, if you want to add an alias to the container, use the provided aliases.txt.
+If you need to execute a precise command at first container run, you can edit entrypoint.sh.
+If you want to change or review users' passwords, you can manage them inside passwd.txt. 
 
 Note: I have included all main libraries to let the majority of games to work, including vulkan, opengl and gtk support, the build process might require a while to finish.
 

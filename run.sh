@@ -32,7 +32,7 @@ docker run \
   -v ~/.config/pulse/cookie:/root/.config/pulse/cookie \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   -v ~/.Xauthority:/root/.Xauthority \
-  -v /home/$USER:/home/admin/bench \
+  -v /home/$USER:/home/admin/"$USER"_home \
   -v /media:/media \
   -v $SCRIPTFOLDER/aliases.txt:/home/admin/aliases.txt \
   -v lutris_prefixes:/home/admin/Games \
